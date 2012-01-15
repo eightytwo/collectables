@@ -1,0 +1,57 @@
+{% from "_macros.html" import link_to %}
+{% from "_macros.html" import form_tag %}
+
+<!doctype html>
+
+<title>Collectables</title>
+<meta charset="utf-8"></meta>
+<link rel="stylesheet" type="text/css" href="{{ url_for('.static', filename='css/style.css') }}">
+<script type=text/javascript src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script type=text/javascript src="{{ url_for('.static', filename='js/main.js') }}"></script>
+
+<div id="page">
+    <div id="greeting_container">
+        <div id="greeting">
+            {%- if not session.logged_in %}
+            {{ link_to("login", 'account.login') }} | {{ link_to("register", 'account.register') }}
+            {%- else %}
+            hello <a href=""><span class="bold">{{ session.username }}</span></a>
+            | {{ link_to("logout", 'account.logout') }}
+            {%- endif %}
+        </div>
+    </div>
+
+    <div id="logo"></div>
+
+    <div id="menubar">
+        <div id="search_container">
+            {% call form_tag('frontend.search', method='get') %}
+                <div id="search_textbox">
+                    <input type="text" id="textbox_search" name="t" class="textbox_search" value="{{ request.args.t }}" />
+                </div>
+            {% endcall %}
+        </div>
+        
+        <div id="menu">
+            <ul class="menu_list">
+                <li class="menu_item"><a href="">stashes</a></li>
+                <li class="menu_item"><a href="">hunters</a></li>
+                <li class="menu_item"><a href="">treasure map</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    {%- with messages = get_flashed_messages(with_categories=true) %}
+    {%- if messages %}
+    {%- for category, message in messages %}
+    <div class="flash_{{ category }}">{{ message }}</div>
+    {%- endfor %}
+    {%- endif %}
+    {%- endwith %}
+    
+    <div id="content">
+        {% block body %}{% endblock %}
+    </div>
+</div>

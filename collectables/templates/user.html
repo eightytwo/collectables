@@ -1,0 +1,33 @@
+{% from "_macros.html" import render_result_list %}
+{% from "_macros.html" import render_thumbnail %}
+{% from "_macros.html" import render_user_heading %}
+
+{% extends "layout.html" %}
+
+{% block body %}
+    {{ render_user_heading(res.username, res.item_count, res.collections|length) }}
+    
+    {% if res.collections is none or res.collections|length == 0 %}
+    {{ res.username }} has no collections.
+    {% else %}
+    {# Iterate over the distinct collections of the user #}
+    {% for collection in res.collections %}
+    <div class="collection_container">
+        <div>
+            <div class="section_heading_indicator">&raquo;</div>
+            <div class="section_heading">
+                {{ link_to(collection.name, 'collection', username=res.username, collection=collection.name) }}
+                ({{ collection.count|int(0) }})
+            </div>
+        </div>
+
+        {{ render_result_list(collection['items'], res.photo_base_url) }}
+    </div>
+
+    <div class="clear_left"></div>
+
+    <br />
+    <br />
+    {% endfor %}
+    {% endif %}
+{% endblock %}

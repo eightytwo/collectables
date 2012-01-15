@@ -1,0 +1,649 @@
+/*
+ * Styles for html elements
+ */
+
+body {
+    background: #fff;
+    margin: 0px;
+    padding: 0px;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:active {
+    color: #000;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+input {
+    font-family: Georgia, serif;
+}
+
+input:focus {
+    outline: none;
+    outline-width: 0;
+}
+
+textarea {
+    font-family: Georgia, serif;
+}
+
+textarea:focus {
+    outline: none;
+    outline-width: 0;
+}
+
+
+/*
+ * Styles for divs
+ */
+
+#page {
+    margin: 0px auto;
+    width: 730px;
+    padding: 0px;
+    border: 0px solid red;
+}
+
+#greeting_container {
+    height: 20px;
+    margin-bottom: 30px;
+}
+
+#greeting {
+    float: right;
+    padding: 6px 12px 6px 12px;
+    border: 0px solid #000;
+    background-color: rgba(0,0,0,0.1);
+    -moz-border-radius: 0px 0px 4px 4px;
+    -webkit-border-radius: 0px 0px 4px 4px;
+    -khtml-border-radius: 0px 0px 4px 4px;
+    border-radius: 0px 0px 4px 4px;
+}
+
+#logo {
+    margin: 0px auto;
+    background: url(../images/logo.png) no-repeat;
+    width: 434px;
+    height: 194px;
+}
+
+#menubar {
+    margin: 20px 0px;
+}
+
+#menu ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+#menu li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 60px;
+    font-size: 20px;
+}
+
+#search_container {
+    float: right;
+    margin-top: -6px;
+    margin-left: 40px;
+    background: url(../images/search_box.png) no-repeat;
+    width: 225px;
+    height: 37px;
+}
+
+#search_textbox {
+    width: 225px;
+    height: 37px;
+    padding: 5px 0px;
+}
+
+#content {
+    text-align: left;
+}
+
+#error_container {
+    margin-top: 60px;
+    text-align: center;
+}
+
+#login_container {
+    width: 400px;
+    margin: 40px auto;
+}
+
+#register_container {
+    width: 345px;
+    margin: 40px auto;
+}
+
+#add_item_container {
+    width: 400px;
+    margin: 40px auto;
+}
+
+#user_heading_container {
+    margin-bottom: 30px;
+}
+
+#user_heading {
+    font-size: 26px;
+}
+
+#user_heading_tally {
+    margin-left: 14px;
+    color: #969696;
+    font-size: 12px;
+    font-style: italic;
+}
+
+#user_heading_tally a {
+    color: #969696; 
+}
+
+#user_heading_tally a:hover {
+    color: #969696;
+}
+
+#user_heading_tally a:hover {
+    color: #969696;
+}
+
+#user_heading_tally a:hover {
+    color: #969696;
+    text-decoration: underline;
+}
+
+
+/*
+ * Styles for classes
+ */
+
+.divider {
+    margin: 30px auto;
+    background: url(../images/divider.png) no-repeat;
+    width: 177px;
+    height: 12px;
+}
+
+.section_heading {
+    margin: 10px 0px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #ccc;
+    color: #969696;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.section_heading_indicator {
+    display: none;
+    float: left;
+    margin-left: -20px;
+    color: #969696;
+    font-size: 18px;
+}
+
+.section_heading a {
+    color: #969696;
+    text-decoration: none;
+}
+
+.section_heading a:active {
+    color: #969696;
+    text-decoration: none;
+}
+
+.section_heading a:visited {
+    color: #969696;
+    text-decoration: none;
+}
+
+.section_heading a:hover {
+    color: #969696;
+    text-decoration: underline;
+}
+
+.required_indicator {
+    float: left;
+    margin-left: -16px;
+    margin-top: 2px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #DE861E;
+}
+
+.field_tip {
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: italic;
+    color: #969696;
+}
+
+.login_field_set {
+    float: left;
+    margin-bottom: 20px;
+}
+
+.login_field_set input[type='text'], input[type='password'] {
+    width: 150px;
+    margin-right: 15px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding: 2px;
+}
+
+.login_field_label {
+    font-weight: bold;
+}
+
+.login_button {
+    width: 50px;
+}
+
+.register_button {
+    width: 80px;
+}
+
+.add_item_field_set {
+    margin-bottom: 20px;
+}
+
+.add_item_field_set input[type='text'] {
+    width: 350px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding: 2px;
+}
+
+.add_item_field_set textarea {
+    width: 350px;
+    height: 100px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding: 2px;
+}
+
+.add_item_field_label {
+    font-weight: bold;
+}
+
+.add_item_button {
+    width: 50px;
+}
+
+.collection_items ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.collection_items li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 60px;
+}
+
+.pagination {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.page_range {
+    margin: 0px 12px;
+}
+
+.inactive_link {
+    color: #969696;
+}
+
+.item_container {
+    margin-bottom: 40px;
+}
+
+.item_images {
+    float: right;
+    width: 300px;
+    margin-left: 35px;
+    padding-left: 15px;
+    border-left: 1px solid #eee;
+    text-align: center;
+}
+
+.item_thumbnails {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.item_thumbnail_container {
+    float: left;
+    position: relative;
+    width: 100px;
+}
+
+.item_thumbnail {
+    padding: 2px;
+    border: 1px solid #eee;
+    cursor: pointer;
+}
+
+.item_thumbnail_placeholder {
+    position: relative;
+    float: left;
+    width: 80px;
+    height: 80px;
+    padding: 2px;
+    border: 1px solid #eee;
+    cursor: pointer;
+    text-align: center;
+}
+
+.item_thumbnail_placeholder_content {
+    font-weight: bolder;
+    font-size: 40px;
+    color: #999;
+    line-height: 75px;
+}
+
+.item_thumbnail_remove {
+    display: none;
+    position: absolute;
+    top: 1px;
+    right: 15px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    color: #999;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.item_image_add {
+    display: none;
+    text-align: left;
+}
+
+.item_property {
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.item_description {
+    margin: 0px;
+    padding: 0px;
+}
+
+.item_description:first-letter {
+    font-size: 18px;
+}
+
+.item_property_heading {
+    margin-bottom: 2px;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.item_property_list_value {
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    margin-right: 10px;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.edit_controls_container {
+    width: 20px;
+    float: left;
+    margin-left: -20px;
+    color: #999;
+    font-weight: 20px;
+    font-size: 20px;
+}
+
+.pilcrow {
+    visibility: hidden;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cancel_edit {
+    display: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.accept_button {
+    display: none;
+    margin: 0px;
+    margin-left: -25px;
+    padding: 0px;
+    color: #999;
+    font-size: 20px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.edit_label {
+    margin: 0px;
+}
+
+.edit_control {
+    display: none;
+}
+
+.edit_control textarea {
+    width: 350px;
+    height: 100px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding: 2px;
+}
+
+.edit_control input[type='text'] {
+    width: 350px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding: 2px;
+}
+
+.result {
+    float: left;
+    width: 120px;
+    text-align: center;
+}
+
+.result_thumbnail {
+    padding: 2px;
+    border: 1px solid #eee;
+}
+
+
+/* Form controls */
+
+.textbox_search {
+    background: transparent;
+    border: 0px solid red;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    width: 215px;
+    height 39px;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #333;
+}
+
+.link_button {
+    margin: 0px 2px;
+    padding: 0px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 14px;
+}
+
+.link_button:hover {
+    text-decoration: underline;
+}
+
+.remove_glyph {
+    visibility: hidden;
+    cursor: pointer;
+    color: #999;
+    border: none;
+    background: none;
+    font-size: 16px;
+    vertical-align: middle;
+    margin: 0px;
+    padding: 0px;
+}
+
+.remove_glyph_hover {
+    color: #cc2121;
+}
+
+.love_button {
+    float: right;
+    background: url(../images/heart_empty.png) no-repeat;
+    width: 16px;
+    height: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.love_glyph {
+    float: right;
+    width: 16px;
+    height: 16px;
+    background: url(../images/heart_empty.png) no-repeat;
+}
+
+.love_glyph_active {
+    background: url(../images/heart.png) no-repeat;
+}
+
+.love_counter {
+    float: right;
+    margin-right: 6px;
+}
+
+.combo_glyph {
+    cursor: pointer;
+}
+
+.combo_box {
+    position: absolute;
+    display: none;
+    width: 350px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 100;
+}
+
+.combo_box_item {
+    padding: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.combo_box_item_selected {
+    background-color: #eee;
+}
+
+
+/* Messaging */
+
+.flash_info {
+    margin-bottom: 30px;
+    color: #000;
+    font-weight: bold;
+    background-color: #CEE5F5;
+    padding: 6px;
+    border: 1px solid #AACBE2;
+}
+
+.flash_error {
+    margin-bottom: 30px;
+    color: #fff;
+    font-weight: bold;
+    background-color: #f46e8f;
+    padding: 6px;
+    border: 1px solid #f43d6b;
+}
+
+.error {
+    color: #fff;
+    font-weight: bold;
+    background-color: #f46e8f;
+    margin-bottom: 8px;
+    padding: 6px;
+    border: 1px solid #f43d6b;
+}
+
+.error p {
+    margin: 0px;
+    padding: 2px;
+}
+
+.error_message {
+    margin-top: 30px;
+}
+
+.sad_face {
+    font-size: 100px;
+    color: #eee;
+}
+
+
+/* Utility */
+
+.bold {
+    font-weight: bold;
+}
+
+.clear_both {
+    clear: both;
+}
+
+.clear_left {
+    clear: left;
+}
+
+.hidden {
+    display: none;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.left { 
+    float: left;
+}
+
+.right {
+    float: right;
+}

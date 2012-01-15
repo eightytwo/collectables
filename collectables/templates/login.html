@@ -1,0 +1,27 @@
+{% from "_macros.html" import render_form_errors %}
+
+{% extends "layout.html" %}
+
+{% block body %}
+    <div id="login_container">
+        <div class="section_heading">login</div>
+        {{ render_form_errors(form) }}
+        {% call form_tag('login') %}
+            {{ form.hidden_tag() }}
+            <div class="login_field_set">
+                <div class="login_field_label">username</div>
+                {{ form.username }}
+            </div>
+
+            <div class="login_field_set">
+                <div class="login_field_label">password</div>
+                {{ form.password }}
+            </div>
+
+            <div class="login_field_set">
+                <div class="login_field_label">&nbsp;</div>
+                <input type="submit" value="Login" class="login_button">
+            </div>
+        {% endcall %}
+    </div>
+{% endblock %}

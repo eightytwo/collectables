@@ -1,0 +1,19 @@
+{% from "_macros.html" import render_result_list %}
+{% from "_macros.html" import render_thumbnail %}
+{% from "_macros.html" import search_result_text %}
+
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="section_heading">search results ({{ res.results|default('', true)|length() }})</div>
+    {# Check if the response contains results #}
+    {% if not request.args.t or request.args.t|length() == 0 %}
+    <strong>Hmm, you might want to enter some search terms...</strong>
+    {% elif not res.results or res.results|length() == 0 %}
+    <strong>Sorry, no items were found matching your query.</strong>
+    {% else %}
+    {{ render_result_list(res['results'], res.photo_base_url, include_owner_name=True) }}
+    <br />
+    <br />
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% from "_macros.html" import render_thumbnail %}
+{% from "_macros.html" import render_pagination %}
+{% from "_macros.html" import render_result_list %}
+{% from "_macros.html" import render_user_heading %}
+
+{% extends "layout.html" %}
+
+{% block body %}
+    {{ render_user_heading(res.username, res.item_count, res.collection_count) }}
+
+    <div class="collection_container">
+        <div>
+            <div class="section_heading_indicator">&raquo;</div>
+            <div class="section_heading">{{ res.collection }} ({{ res.collection_item_count }})</div>
+        </div>
+
+        {{ render_result_list(res['items'], res.photo_base_url) }}
+    </div>
+
+    <div class="clear_left"></div>
+
+    {% call form_tag('collection', username=res.username, collection=res.collection) -%}
+        {{ render_pagination(res.pagination) }}
+        <input type="hidden" id="first_updated" name="first_updated" value="{{ res.first_updated }}" />
+        <input type="hidden" id="last_updated" name="last_updated" value="{{ res.last_updated }}" />
+    {%- endcall %}
+{% endblock %}

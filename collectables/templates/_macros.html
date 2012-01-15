@@ -1,0 +1,92 @@
+{% macro link_to(text, endpoint) -%}
+    <a href="{{ url_for(endpoint, **kwargs) }}">{{ text|safe }}</a>
+{%- endmacro %}
+
+{% macro form_tag(endpoint, method='post', enctype='application/x-www-form-urlencoded') -%}
+    <form action="{{ url_for(endpoint, **kwargs) }}" method="{{ method }}" enctype="{{ enctype }}">
+        {{ caller () }}
+    </form>
+{% endmacro %}
+
+{% macro render_user_heading(username, item_count, collection_count) %}
+    <div id="user_heading_container">
+        <div id="user_heading">{{ username }}</div>
+        <div id="user_heading_tally">
+            &raquo;
+            {% if item_count == 1 %}1 item{% else %}<strong>{{ item_count }}</strong> items{% endif %}
+            in
+            {% if collection_count == 1 %}1 <a href="{{ url_for('user', username=username) }}">collection</a>{% else %}<strong>{{ collection_count }}</strong> <a href="{{ url_for('user', username=username) }}">collections</a>{% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro render_pagination(pagination) %}
+    <div class="pagination">
+        {%- if pagination.has_prev %}
+        &laquo;
+        <button type="submit" class="link_button" name="page" value="{{ pagination.page - 1 }}">
+            <span>prev</span>
+        </button>
+        {%- else %}
+        <span class="inactive_link">&laquo; prev</span>
+        {%- endif %}
+        
+        <span class="page_range">
+            {{ (pagination.per_page * (pagination.page - 1)) + 1}} - {{ pagination.per_page * pagination.page }}
+        </span>
+        
+        {%- if pagination.has_next %}
+        <button type="submit" class="link_button" name="page" value="{{ (pagination.page + 1) * -1 }}">
+            <span>next</span>
+        </button>
+        &raquo;
+        {%- else %}
+        <span class="inactive_link">next &raquo;</span>
+        {%- endif %}
+    </div>
+{% endmacro %}
+
+{% macro render_form_errors(form) -%}
+    {%- if form.errors and form.errors|length > 0 %}
+    <div class="error">
+    {%- for field, errors in form.errors.items() %}
+    {%- if field != 'csrf' %}
+        <p>{{ errors[0] }}</p>
+    {%- endif %}
+    {%- endfor %}
+    </div>
+    {%- endif %}
+{%- endmacro %}
+
+{% macro render_thumbnail(base_url, owner, id, filename, class) -%}
+    <img src="{{ '%s%s/%s/thumb_%s' % (base_url, owner, id, filename) }}" class="{{ class }}" width="80" height="80" alt="{{ filename }}" />
+{%- endmacro %}
+
+{% macro render_preview(base_url, owner, id, filename) -%}
+    <img id="item_preview" src="{{ '%s%s/%s/preview_%s' % (base_url, owner, id, filename) }}" class="{{ class }}" width="300" height="300" />
+{%- endmacro %}
+
+{% macro search_result_text(item_name, item_owner) -%}
+    {{ item_name }}<br />by {{ item_owner }}
+{%- endmacro %}
+
+{% macro render_result_list(items, photo_base_url, include_owner_name=False) %}
+    <div class="collection_items">
+        <ul>
+        {% for item in items %}
+            <div class="result">
+                <div class="result_thumb">
+                    {{ link_to(render_thumbnail(photo_base_url, item.owner, item._id, item.photos[0], 'result_thumbnail'), 'item', username=item.owner, safe_id=item.safe_id, slug=item.slug) }}
+                </div>
+                <div class="result_text">
+                    {% if include_owner_name %}
+                        {{ link_to(search_result_text(item.name, item.owner), 'item', username=item.owner, safe_id=item.safe_id, slug=item.slug) }}
+                    {% else %}
+                        {{ link_to(item.name, 'item', username=item.owner, safe_id=item.safe_id, slug=item.slug) }}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        </ul>
+    </div>
+{% endmacro %}

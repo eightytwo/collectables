@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div id="error_container">
+        <h1>Oops!</h1>
+
+        {% if code == 404 %}
+        <div class="error_message">Whatever you're looking for doesn't appear to be here.</div>
+        <div class="sad_face">&#9785;</div>
+        {% elif code == 401 %}
+        <div class="error_message">Sorry, you're not allowed to do that.</div>
+        <div class="sad_face">&#9785;</div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% from "_macros.html" import render_form_errors %}
+
+{% extends "layout.html" %}
+
+{% block body %}
+    <div id="add_item_container">
+        <div class="section_heading">add item</div>
+        {{ render_form_errors(res.form) }}
+        {% call form_tag('add_item', enctype='multipart/form-data') %}
+            {{ res.form.hidden_tag() }}
+            <span class="required_indicator">*</span>
+            <div class="add_item_field_set">
+                <div class="add_item_field_label">name </div>
+                {{ res.form.name }}
+            </div>
+
+            <span class="required_indicator">*</span>
+            <div class="add_item_field_set">
+                <div class="add_item_field_label">collection</div>
+                {{ res.form.collection }}
+                {% if res.collections and res.collections|length > 0 %}
+                <img src="static/images/combo.png" width="16" height="16" class="combo_glyph" />
+                <div class="combo_box">
+                    {% for c in res.collections %}
+                    <div class="combo_box_item">{{ c['_id'] }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <span class="required_indicator">*</span>
+            <div class="add_item_field_set">
+                <div class="add_item_field_label">description</div>
+                {{ res.form.description }}
+            </div>
+            
+            <span class="required_indicator">*</span>
+            <div class="add_item_field_set">
+                <div class="add_item_field_label">
+                    tags
+                    <span class="field_tip">(separate tags with commas)</span>
+                </div>
+                {{ res.form.tags }}
+            </div>
+
+            <div class="add_item_field_set">
+                <div class="add_item_field_label">year</div>
+                {{ res.form.year(class_="add_item_field_year") }}
+            </div> 
+            
+            <div class="add_item_field_set">
+                <div class="add_item_field_label">photo</div>
+                {{ res.form.photo }}
+            </div>
+            
+            <div class="add_item_field_set">
+                <input type="submit" value="Add" class="add_item_button" />
+            </div>
+        {%- endcall %}
+    </div>
+{% endblock %}
+
