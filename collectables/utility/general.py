@@ -24,11 +24,6 @@ def debug():
     assert current_app.debug == False, "Don't panic! You're here by" \
                                        "request of debug() :)"
 
-def get_photo_base_url():
-    """Gets the base URL for the photo store."""
-    photos = UploadSet('photos', IMAGES)
-    return photos.url('')
-
 def upload_photo(file_data, path, filename):
     """Uploads a photo to storage."""
     photo_set = UploadSet('photos', IMAGES)

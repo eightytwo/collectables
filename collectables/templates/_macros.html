@@ -15,7 +15,7 @@
             &raquo;
             {% if item_count == 1 %}1 item{% else %}<strong>{{ item_count }}</strong> items{% endif %}
             in
-            {% if collection_count == 1 %}1 <a href="{{ url_for('user', username=username) }}">collection</a>{% else %}<strong>{{ collection_count }}</strong> <a href="{{ url_for('user', username=username) }}">collections</a>{% endif %}
+            {% if collection_count == 1 %}1 <a href="{{ url_for('user.collections', username=username) }}">collection</a>{% else %}<strong>{{ collection_count }}</strong> <a href="{{ url_for('user.collections', username=username) }}">collections</a>{% endif %}
         </div>
     </div>
 {% endmacro %}
@@ -76,13 +76,13 @@
         {% for item in items %}
             <div class="result">
                 <div class="result_thumb">
-                    {{ link_to(render_thumbnail(photo_base_url, item.owner, item._id, item.photos[0], 'result_thumbnail'), 'item', username=item.owner, safe_id=item.safe_id, slug=item.slug) }}
+                    {{ link_to(render_thumbnail(photo_base_url, item.user_id, item.safe_id, item.photo, 'result_thumbnail'), 'item.item_summary', safe_id=item.safe_id, slug=item.slug) }}
                 </div>
                 <div class="result_text">
                     {% if include_owner_name %}
-                        {{ link_to(search_result_text(item.name, item.owner), 'item', username=item.owner, safe_id=item.safe_id, slug=item.slug) }}
+                        {{ link_to(search_result_text(item.name, item.username), 'item.item_summary', safe_id=item.safe_id, slug=item.slug) }}
                     {% else %}
-                        {{ link_to(item.name, 'item', username=item.owner, safe_id=item.safe_id, slug=item.slug) }}
+                        {{ link_to(item.name, 'item.item_summary', safe_id=item.safe_id, slug=item.slug) }}
                     {% endif %}
                 </div>
             </div>

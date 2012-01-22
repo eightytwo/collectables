@@ -31,6 +31,3 @@ SECRET_KEY = 'something secret'
 
 # Upload directory
 UPLOADED_PHOTOS_DEST = '/tmp/collectables/photos'
-
-# General application settings
-ITEMS_PER_PAGE = 2

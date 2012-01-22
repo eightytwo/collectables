@@ -6,38 +6,38 @@
 {% extends "layout.html" %}
 
 {% block body %}
-{{ render_user_heading(res.username, res.item_count, res.collection_count) }}
+{{ render_user_heading(user.username, num_items, num_collections) }}
 
 <div class="collection_container">
     <div class="right">
-        {% if res.logged_in and not res.is_owner and not res.has_voted -%}
-        <button type="submit" class="love_button" name="item" value="{{ res.item.safe_id }}"></button>
+        {% if logged_in and not is_owner and not has_voted -%}
+        <button type="submit" class="love_button" name="item" value="{{ item.safe_id }}"></button>
         {% else -%}
-        <div class="love_glyph{% if res.item.votes > 0 %} love_glyph_active{% endif %}"></div>    
+        <div class="love_glyph{% if item.votes|length > 0 %} love_glyph_active{% endif %}"></div>    
         {% endif -%}
-        <div class="love_counter{% if res.item.votes == 0 %} hidden{% endif %}">{{ res.item.votes }}</div>
+        <div class="love_counter{% if item.votes|length == 0 %} hidden{% endif %}">{{ item.votes|length }}</div>
     </div>
 
-    <div class="section_heading">{{ res.item.name }}</div>
+    <div class="section_heading">{{ item.name }}</div>
     <div class="item_container">
         <div class="item_images">
             <div class="item_preview">
-                {{ render_preview(res.photo_base_url, res.item.owner, res.item._id, res.item.photos[0]) }}
+                {{ render_preview(photo_base_url, user.id, item.safe_id, item.photos[0]) }}
             </div>
 
             <div class="item_thumbnails">
-                {% if res.item.photos and res.item.photos|length > 0 -%}
-                {% for photo in res.item.photos -%}
+                {% if item.photos and item.photos|length > 0 -%}
+                {% for photo in item.photos -%}
                 <div class="item_thumbnail_container">
-                    {% if res.is_owner -%}
+                    {% if is_owner -%}
                     <div class="item_thumbnail_remove">&#10006;</div>
                     {%- endif %}
-                    {{ render_thumbnail(res.photo_base_url, res.item.owner, res.item._id, photo, 'item_thumbnail') }}
+                    {{ render_thumbnail(photo_base_url, user.id, item.safe_id, photo, 'item_thumbnail') }}
                 </div>
                 {%- endfor %}
                 {%- endif %}
                 
-                {% if res.is_owner -%}
+                {% if is_owner -%}
                 <div class="item_thumbnail_container">
                     <div class="item_thumbnail_placeholder">
                         <div class="item_thumbnail_placeholder_content">+</div>
@@ -48,10 +48,10 @@
                 <div class="clear_left"></div>
             </div>
 
-            {% if res.is_owner %}
+            {% if is_owner %}
             <div class="item_image_add">
                 <form action="/add_item_image" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" id="item_safe_id" name="safe_id" value="{{ res.item.safe_id }}" />
+                    <input type="hidden" id="item_safe_id" name="safe_id" value="{{ item.safe_id }}" />
                     
                     <div class="add_item_field_set">
                         <input type="file" name="new_image" />
@@ -66,100 +66,71 @@
         </div>
         <div>
             <div class="item_property">
-            {% if res.is_owner -%}
+            {% if is_owner -%}
                 <div class="edit_controls_container">
                     <span class="pilcrow">&para;</span>
-                    <button id="update_item_description" type="button" class="accept_button" name="context" value="{{ res.item.safe_id }}">&#10003;</button>
+                    <button id="update_item_description" type="button" class="accept_button" name="context" value="{{ item.safe_id }}">&#10003;</button>
                     <span class="cancel_edit">&#10006;</span>
                 </div>
                 <div class="edit_label">
-                    <p class="item_description">{{ res.item.description }}</p>
+                    <p class="item_description">{{ item.description }}</p>
                 </div>
                 <div class="edit_control">
-                    <textarea name="parameter">{{ res.item.description }}</textarea>
+                    <textarea name="parameter">{{ item.description }}</textarea>
                 </div>
             {%- else %}
-                <p class="item_description">{{ res.item.description }}</p>
+                <p class="item_description">{{ item.description }}</p>
             {% endif %}
             </div>
 
             <div class="item_property">
-                {% if res.is_owner %}
+                {% if is_owner %}
                 <div class="edit_controls_container">
                     <span class="pilcrow">&para;</span>
-                    <button id="add_item_collection" type="button" class="accept_button" name="context" value="{{ res.item.safe_id }}">&#10003;</button>
-                    <span class="cancel_edit">&#10006;</span>
-                </div>
-                {% endif %}
-                <div class="item_property_heading">collections</div>
-                {% if res.is_owner -%}
-                    {% for c in res.item.collections -%}
-                    <div class="item_property_list_value">
-                        {{ link_to(c, 'collection', username=res.username, collection=c) }}
-                        <button type="submit" class="remove_glyph" name="collection" value="{{ res.item.safe_id }}">&#10006;</button>
-                    </div>    
-                    {% endfor -%}
-                    <div class="edit_control">
-                        <input type="text" name="parameter" value="" />
-                    </div>
-                {%- else %}
-                    {% for c in res.item.collections -%}
-                    <div class="item_property_list_value">
-                        {{ link_to(c, 'collection', username=res.username, collection=c) }}
-                    </div>
-                    {% endfor %}
-                {% endif -%}
-                <div class="clear_left"></div>
-            </div>
-
-            <div class="item_property">
-                {% if res.is_owner %}
-                <div class="edit_controls_container">
-                    <span class="pilcrow">&para;</span>
-                    <button id="add_item_tag" type="button" class="accept_button" name="context" value="{{ res.item.safe_id }}">&#10003;</button>
+                    <button id="add_item_tag" type="button" class="accept_button" name="context" value="{{ item.safe_id }}">&#10003;</button>
                     <span class="cancel_edit">&#10006;</span>
                 </div>
                 {% endif %}
                 <div class="item_property_heading">tags</div>
-                {% if res.is_owner -%}
-                    {% for t in res.item.tags -%}
+                {% if is_owner -%}
+                    {% for t in item.tags -%}
                     <div class="item_property_list_value">
-                        {{ link_to(t, 'search', t=t) }}
-                        <button type="submit" class="remove_glyph" name="tag" value="{{ res.item.safe_id }}">&#10006;</button>
+                        {{ link_to(t, 'frontend.search', t=t) }}
+                        <button type="submit" class="remove_glyph" name="tag" value="{{ item.safe_id }}">&#10006;</button>
                     </div>    
                     {% endfor -%}
                     <div class="edit_control">
                         <input type="text" name="parameter" value="" />
                     </div>
                 {%- else %}
-                    {% for t in res.item.tags -%}
+                    {% for t in item.tags -%}
                     <div class="item_property_list_value">
-                        {{ link_to(t, 'search', t=t) }}
+                        {{ link_to(t, 'frontend.search', t=t) }}
                     </div>    
                     {% endfor %}
                 {% endif -%}
                 <div class="clear_left"></div>
             </div>
 
-            {% if res.is_owner or res.item.year -%}
+            {% if is_owner or item.year -%}
             <div class="item_property">
-                {% if res.is_owner %}
+                {% if is_owner %}
                 <div class="edit_controls_container">
                     <span class="pilcrow">&para;</span>
-                    <button id="update_item_year" type="button" class="accept_button" name="context" value="{{ res.item.safe_id }}">&#10003;</button>
+                    <button id="update_item_year" type="button" class="accept_button" name="context" value="{{ item.safe_id }}">&#10003;</button>
                     <span class="cancel_edit">&#10006;</span>
                 </div>
                 {% endif %}
                 <div class="item_property_heading">year</div>
-                {% if res.is_owner -%}
+                {% if is_owner -%}
                 <div class="edit_label">
-                    <span>{{ res.item.year or "-" }}</span>
+                    <span>{{ item.year or "-" }}</span>
                 </div>
                 <div class="edit_control">
-                    <input type="text" name="parameter" value="{{ res.item.year or "" }}" />
+                    <input type="text" name="parameter" value="{{ item.year or "" }}" />
                 </div>
-                {% elif res.item.year -%}
-                {{ res.item.year }}
+                {% elif item.year -%}
+                {{ item.year }}
                 {%- endif %}
             </div>
             {%- endif %}

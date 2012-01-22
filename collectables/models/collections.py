@@ -13,7 +13,6 @@
 from datetime import datetime
 
 from collectables.extensions import db
-from collectables.models.users import User
 
 class Collection(db.Model):
     """Describes a collection which belongs to a user and contains many
@@ -22,13 +21,24 @@ class Collection(db.Model):
 
     __tablename__ = 'collections'
 
+    # The number of collections to display on a single page.
+    PER_PAGE = 10
+
+    # The number of collections to display on a single page.
+    PREVIEW_SIZE = 5
+    
     id = db.Column(db.Integer, primary_key=True)
+    safe_id = db.Column(db.String(60), unique=True, nullable=False)
     name = db.Column(db.Unicode(60), nullable=False)
+    slug = db.Column(db.Unicode(200), nullable=False)
     user_id = db.Column(db.Integer,
-                        db.ForeignKey(User.id, ondelete='CASCADE'),
+                        db.ForeignKey('users.id', ondelete='CASCADE'),
                         nullable=False)
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow)
+    items = db.relationship('Item',
+                            backref='collection',
+                            lazy='dynamic')
 
     def __init__(self, *args, **kwargs):
         super(Collection, self).__init__(*args, **kwargs)
