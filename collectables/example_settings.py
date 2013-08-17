@@ -21,7 +21,7 @@ TESTING = False
 SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@localhost:5433/collectables'
 
 # Logging settings
-ADMINS = ['eightytwo']
+ADMINS = ['admin@null.net']
 SMTP_SERVER = '127.0.0.1'
 FROM_ADDRESS = 'user@host.net'
 SUBJECT = 'Application Failure'
